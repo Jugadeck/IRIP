@@ -6,9 +6,7 @@
     <title>Interstellar Robotics & Innovation Park</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <!-- 3D Background Canvas -->
@@ -18,7 +16,7 @@
     <nav>
         <div class="nav-container">
             <a href="#" class="logo">
-                <img src="images/logo.png" alt="IRP Logo">
+                <img src="logo.png.jpeg" alt="IRP Logo">
                 <span class="logo-text">INTERSTELLAR</span>
             </a>
             <ul class="nav-links">
@@ -29,7 +27,7 @@
                 <li><a href="#partners">Partners</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-            <div class="mobile-menu">
+            <div class="mobile-menu" onclick="toggleMenu()">
                 <i class="fas fa-bars"></i>
             </div>
         </div>
@@ -232,7 +230,7 @@
                 </ul>
             </div>
             <div class="contact-form">
-                <form>
+                <form onsubmit="handleSubmit(event)">
                     <div class="form-group">
                         <label>Your Name</label>
                         <input type="text" placeholder="Enter your full name" required>
@@ -271,10 +269,10 @@
 
     <!-- Lightbox Modal -->
     <div class="lightbox" id="lightbox">
-        <span class="close-lightbox">&times;</span>
+        <span class="close-lightbox" onclick="closeLightbox()">&times;</span>
         <img class="lightbox-content" id="lightbox-img">
     </div>
 
-    <script src="js/main.js"></script>
+    <script src="main.js"></script>
 </body>
 </html>
