@@ -1,4 +1,4 @@
-// Clean Space Background - Vertical Rockets Only
+// Clean Space Background - Vertical Rockets
 const canvas = document.createElement('canvas');
 const ctx = canvas.getContext('2d');
 document.getElementById('canvas-container').appendChild(canvas);
