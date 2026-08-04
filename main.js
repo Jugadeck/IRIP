@@ -1,46 +1,55 @@
-// Three.js 3D Background
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.getElementById('canvas-container').appendChild(renderer.domElement);
+// 3D Starfield Background
+const canvas = document.createElement('canvas');
+const ctx = canvas.getContext('2d');
+document.getElementById('canvas-container').appendChild(canvas);
 
-// Create stars
-const starsGeometry = new THREE.BufferGeometry();
-const starsCount = 2000;
-const posArray = new Float32Array(starsCount * 3);
+let width, height;
+let stars = [];
 
-for(let i = 0; i < starsCount * 3; i++) {
-    posArray[i] = (Math.random() - 0.5) * 100;
+function resize() {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
 }
 
-starsGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-const starsMaterial = new THREE.PointsMaterial({
-    size: 0.02,
-    color: 0xffffff,
-    transparent: true,
-    opacity: 0.8
-});
+function createStars() {
+    stars = [];
+    for (let i = 0; i < 200; i++) {
+        stars.push({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            size: Math.random() * 2,
+            speed: Math.random() * 0.5 + 0.1
+        });
+    }
+}
 
-const starsMesh = new THREE.Points(starsGeometry, starsMaterial);
-scene.add(starsMesh);
-
-camera.position.z = 5;
-
-// Animation
 function animate() {
+    ctx.fillStyle = 'rgba(2, 6, 23, 0.3)';
+    ctx.fillRect(0, 0, width, height);
+    
+    stars.forEach(star => {
+        ctx.fillStyle = 'white';
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+        ctx.fill();
+        
+        star.y += star.speed;
+        if (star.y > height) {
+            star.y = 0;
+            star.x = Math.random() * width;
+        }
+    });
+    
     requestAnimationFrame(animate);
-    starsMesh.rotation.y += 0.0005;
-    starsMesh.rotation.x += 0.0002;
-    renderer.render(scene, camera);
 }
+
+resize();
+createStars();
 animate();
 
-// Resize handler
 window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    resize();
+    createStars();
 });
 
 // Load photos from localStorage
@@ -49,11 +58,11 @@ function loadGallery() {
     const galleryContainer = document.getElementById('gallery-container');
     
     if (photos.length === 0) {
-        galleryContainer.innerHTML = '<p style="text-align: center; color: #94a3b8; grid-column: 1/-1;">No photos yet. Add photos from the admin panel.</p>';
+        galleryContainer.innerHTML = '<p style="text-align: center; color: #94a3b8; grid-column: 1/-1; font-size: 1.2rem;">No photos yet. Add photos from the admin panel.</p>';
         return;
     }
 
-    galleryContainer.innerHTML = photos.map((photo, index) => `
+    galleryContainer.innerHTML = photos.map(photo => `
         <div class="gallery-item" onclick="openLightbox('${photo.url}')">
             <img src="${photo.url}" alt="${photo.title}">
             <div class="gallery-overlay">
@@ -70,13 +79,13 @@ function openLightbox(url) {
     document.getElementById('lightbox-img').src = url;
 }
 
-document.querySelector('.close-lightbox').addEventListener('click', () => {
+function closeLightbox() {
     document.getElementById('lightbox').style.display = 'none';
-});
+}
 
 document.getElementById('lightbox').addEventListener('click', (e) => {
     if (e.target === document.getElementById('lightbox')) {
-        document.getElementById('lightbox').style.display = 'none';
+        closeLightbox();
     }
 });
 
@@ -101,9 +110,29 @@ function loadSocialLinks() {
     }
 }
 
-// Initialize
-loadGallery();
-loadSocialLinks();
+// Form handler
+function handleSubmit(e) {
+    e.preventDefault();
+    alert('Thank you for your message! We will get back to you soon.');
+    e.target.reset();
+}
+
+// Mobile menu toggle
+function toggleMenu() {
+    const navLinks = document.querySelector('.nav-links');
+    if (navLinks.style.display === 'flex') {
+        navLinks.style.display = 'none';
+    } else {
+        navLinks.style.display = 'flex';
+        navLinks.style.flexDirection = 'column';
+        navLinks.style.position = 'absolute';
+        navLinks.style.top = '100%';
+        navLinks.style.left = '0';
+        navLinks.style.right = '0';
+        navLinks.style.background = 'rgba(15, 23, 42, 0.98)';
+        navLinks.style.padding = '2rem';
+    }
+}
 
 // Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -116,34 +145,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// GSAP Animations
-gsap.registerPlugin(ScrollTrigger);
-
-gsap.from('.hero-content', {
-    duration: 1.5,
-    y: 100,
-    opacity: 0,
-    ease: 'power3.out'
-});
-
-gsap.from('.stat-item', {
-    scrollTrigger: {
-        trigger: '.stats',
-        start: 'top 80%'
-    },
-    duration: 0.8,
-    y: 50,
-    opacity: 0,
-    stagger: 0.2
-});
-
-gsap.from('.program-card', {
-    scrollTrigger: {
-        trigger: '.programs',
-        start: 'top 80%'
-    },
-    duration: 0.8,
-    y: 50,
-    opacity: 0,
-    stagger: 0.3
-});
+// Initialize
+loadGallery();
+loadSocialLinks();
