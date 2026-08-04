@@ -32,6 +32,7 @@ h1, h2, h3 {
     width: 100%;
     height: 100%;
     z-index: -1;
+    pointer-events: none; /* Ensures clicks pass through to links */
 }
 
 nav {
@@ -58,6 +59,7 @@ nav {
     align-items: center;
     gap: 12px;
     text-decoration: none;
+    cursor: pointer;
 }
 
 .logo img {
@@ -92,6 +94,7 @@ nav {
     text-transform: uppercase;
     letter-spacing: 1px;
     font-size: 0.85rem;
+    cursor: pointer;
 }
 
 .nav-links a:hover {
@@ -225,69 +228,6 @@ nav {
 .btn-store:hover {
     transform: translateY(-3px);
     box-shadow: 0 15px 50px rgba(168, 85, 247, 0.7);
-}
-
-.btn-store-outline {
-    background: transparent;
-    color: var(--accent-orange);
-    border: 2px solid var(--accent-orange);
-    padding: 0.8rem 2rem;
-}
-
-.btn-store-outline:hover {
-    background: var(--accent-orange);
-    color: white;
-    transform: translateY(-3px);
-}
-
-/* Store Banner */
-.store-banner {
-    background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(249, 115, 22, 0.2));
-    border: 1px solid rgba(168, 85, 247, 0.3);
-    border-radius: 20px;
-    max-width: 1200px;
-    margin: 3rem auto;
-    padding: 2rem;
-    position: relative;
-    z-index: 2;
-    backdrop-filter: blur(10px);
-}
-
-.store-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
-    flex-wrap: wrap;
-}
-
-.store-icon {
-    font-size: 3rem;
-    color: var(--accent-orange);
-    animation: float 3s ease-in-out infinite;
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-}
-
-.store-text {
-    flex: 1;
-    min-width: 250px;
-}
-
-.store-text h3 {
-    font-size: 1.8rem;
-    margin-bottom: 0.5rem;
-    background: linear-gradient(135deg, var(--accent-orange), var(--purple));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.store-text p {
-    color: #cbd5e1;
-    font-size: 1rem;
 }
 
 .stats {
@@ -671,10 +611,12 @@ nav {
     color: #e2e8f0;
     text-decoration: none;
     transition: color 0.3s;
+    cursor: pointer;
 }
 
 .contact-details a:hover {
     color: var(--accent-orange);
+    text-decoration: underline;
 }
 
 .contact-form {
@@ -762,6 +704,7 @@ footer {
     font-size: 1.3rem;
     transition: all 0.3s;
     text-decoration: none;
+    cursor: pointer;
 }
 
 .social-links a:hover {
@@ -779,6 +722,7 @@ footer {
 .footer-bottom a {
     color: var(--accent-orange);
     text-decoration: none;
+    cursor: pointer;
 }
 
 @media (max-width: 968px) {
@@ -805,10 +749,5 @@ footer {
     
     .hero h1 {
         font-size: 2rem;
-    }
-    
-    .store-content {
-        flex-direction: column;
-        text-align: center;
     }
 }
