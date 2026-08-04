@@ -9,18 +9,14 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Hidden anchor for logo scroll -->
     <div id="top"></div>
 
-    <!-- 3D Background Canvas -->
     <div id="canvas-container"></div>
 
-    <!-- Navigation -->
     <nav>
         <div class="nav-container">
-            <!-- FIXED LOGO LINK -->
-            <a href="#top" class="logo">
-                <img src="logo.png.jpeg" alt="IRP Logo">
+            <a href="#top" class="logo-link" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">
+                <img src="logo.png.jpeg" alt="IRP Logo" class="logo-img">
                 <span class="logo-text">INTERSTELLAR</span>
             </a>
             <ul class="nav-links">
@@ -38,7 +34,6 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-content">
             <div class="hero-badge">
@@ -65,7 +60,6 @@
         </div>
     </section>
 
-    <!-- Stats Section -->
     <div class="stats">
         <div class="stat-item">
             <span class="stat-number">2</span>
@@ -85,7 +79,6 @@
         </div>
     </div>
 
-    <!-- About Section -->
     <section class="section" id="about">
         <div class="section-title">
             <h2>About Us</h2>
@@ -113,7 +106,6 @@
         </div>
     </section>
 
-    <!-- Programs Section -->
     <section class="section programs" id="programs">
         <div class="section-title">
             <h2>Our Programs</h2>
@@ -158,18 +150,14 @@
         </div>
     </section>
 
-    <!-- Gallery Section -->
     <section class="section" id="gallery">
         <div class="section-title">
             <h2>Gallery</h2>
             <p>Capturing moments of innovation and learning</p>
         </div>
-        <div class="gallery-grid" id="gallery-container">
-            <!-- Photos will be loaded dynamically -->
-        </div>
+        <div class="gallery-grid" id="gallery-container"></div>
     </section>
 
-    <!-- Partners Section -->
     <section class="section" id="partners">
         <div class="section-title">
             <h2>Our Partners</h2>
@@ -203,7 +191,6 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
     <section class="section contact" id="contact">
         <div class="section-title">
             <h2>Get In Touch</h2>
@@ -215,31 +202,31 @@
                 <p>Whether you're a school administrator, student, or potential partner, we'd love to hear from you.</p>
                 <ul class="contact-details">
                     <li>
-                        <i class="fab fa-instagram"></i>
+                        <div class="contact-icon-box"><i class="fab fa-instagram"></i></div>
                         <div>
                             <strong>Instagram</strong><br>
-                            <a href="https://www.instagram.com/interstellerpark?igsh=ZTAycDl2cTZkMTRu" target="_blank" rel="noopener noreferrer">@interstellerpark</a>
+                            <a href="https://www.instagram.com/interstellerpark?igsh=ZTAycDl2cTZkMTRu" target="_blank" rel="noopener noreferrer" class="contact-link">@interstellerpark</a>
                         </div>
                     </li>
                     <li>
-                        <i class="fab fa-whatsapp"></i>
+                        <div class="contact-icon-box"><i class="fab fa-whatsapp"></i></div>
                         <div>
                             <strong>WhatsApp / Call</strong><br>
-                            <a href="https://wa.me/918736802497" target="_blank" rel="noopener noreferrer">+91 87368 02497</a>
+                            <a href="https://wa.me/918736802497" target="_blank" rel="noopener noreferrer" class="contact-link">+91 87368 02497</a>
                         </div>
                     </li>
                     <li>
-                        <i class="fas fa-envelope"></i>
+                        <div class="contact-icon-box"><i class="fas fa-envelope"></i></div>
                         <div>
                             <strong>Email</strong><br>
-                            <a href="mailto:interstellerpark@gmail.com">interstellerpark@gmail.com</a>
+                            <a href="mailto:interstellerpark@gmail.com" class="contact-link">interstellerpark@gmail.com</a>
                         </div>
                     </li>
                     <li>
-                        <i class="fas fa-store"></i>
+                        <div class="contact-icon-box"><i class="fas fa-store"></i></div>
                         <div>
                             <strong>Our Store</strong><br>
-                            <a href="https://jugadeck.github.io/Jugadteck/" target="_blank" rel="noopener noreferrer">Jugadteck - Buy Projects & Kits</a>
+                            <a href="https://jugadeck.github.io/Jugadteck/" target="_blank" rel="noopener noreferrer" class="contact-link">Jugadteck - Buy Projects & Kits</a>
                         </div>
                     </li>
                 </ul>
@@ -266,16 +253,15 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="footer-content">
             <div class="footer-logo">INTERSTELLAR ROBOTICS & INNOVATION PARK</div>
             <p class="footer-tagline">Beyond Boundaries. Beyond Imagination.</p>
             <div class="social-links">
-                <a href="https://www.instagram.com/interstellerpark?igsh=ZTAycDl2cTZkMTRu" target="_blank" rel="noopener noreferrer" title="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="https://wa.me/918736802497" target="_blank" rel="noopener noreferrer" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                <a href="mailto:interstellerpark@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
-                <a href="https://jugadeck.github.io/Jugadteck/" target="_blank" rel="noopener noreferrer" title="Our Store"><i class="fas fa-store"></i></a>
+                <a href="https://www.instagram.com/interstellerpark?igsh=ZTAycDl2cTZkMTRu" target="_blank" rel="noopener noreferrer" title="Instagram" class="social-icon-link"><i class="fab fa-instagram"></i></a>
+                <a href="https://wa.me/918736802497" target="_blank" rel="noopener noreferrer" title="WhatsApp" class="social-icon-link"><i class="fab fa-whatsapp"></i></a>
+                <a href="mailto:interstellerpark@gmail.com" title="Email" class="social-icon-link"><i class="fas fa-envelope"></i></a>
+                <a href="https://jugadeck.github.io/Jugadteck/" target="_blank" rel="noopener noreferrer" title="Our Store" class="social-icon-link"><i class="fas fa-store"></i></a>
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2026 Interstellar Robotics and Innovation Park. All rights reserved.</p>
@@ -284,7 +270,6 @@
         </div>
     </footer>
 
-    <!-- Lightbox Modal -->
     <div class="lightbox" id="lightbox">
         <span class="close-lightbox" onclick="closeLightbox()">&times;</span>
         <img class="lightbox-content" id="lightbox-img">
