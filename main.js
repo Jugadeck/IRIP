@@ -1,76 +1,160 @@
-// Clean Space Background - Vertical Rockets
+// Space Background with Spaceships and Planets
 const canvas = document.createElement('canvas');
 const ctx = canvas.getContext('2d');
 document.getElementById('canvas-container').appendChild(canvas);
 
 let width, height;
 let stars = [];
-let rockets = [];
+let spaceships = [];
+let planets = [];
 
 function resize() {
     width = canvas.width = window.innerWidth;
     height = canvas.height = window.innerHeight;
 }
 
-// Create stars (white/light gray only)
+// Create stars
 function createStars() {
     stars = [];
-    for (let i = 0; i < 200; i++) {
+    for (let i = 0; i < 250; i++) {
         stars.push({
             x: Math.random() * width,
             y: Math.random() * height,
             size: Math.random() * 1.5 + 0.5,
-            speed: Math.random() * 0.5 + 0.2,
+            speed: Math.random() * 0.4 + 0.1,
             twinkle: Math.random() * Math.PI * 2
         });
     }
 }
 
-// Create vertical rockets (flying straight up)
-function createRockets() {
-    rockets = [];
-    for (let i = 0; i < 2; i++) {
-        rockets.push({
+// Create flying spaceships
+function createSpaceships() {
+    spaceships = [];
+    for (let i = 0; i < 3; i++) {
+        spaceships.push({
             x: Math.random() * width,
-            y: height + 50,
-            speed: Math.random() * 2 + 1.5,
-            size: Math.random() * 12 + 8,
-            opacity: Math.random() * 0.15 + 0.1
+            y: Math.random() * height,
+            speedX: (Math.random() - 0.5) * 0.8,
+            speedY: (Math.random() - 0.5) * 0.8,
+            size: Math.random() * 15 + 10,
+            angle: Math.random() * Math.PI * 2,
+            opacity: Math.random() * 0.2 + 0.1
         });
     }
 }
 
-// Draw simple rocket (white/gray only)
-function drawRocket(rocket) {
-    ctx.save();
-    ctx.globalAlpha = rocket.opacity;
-    ctx.translate(rocket.x, rocket.y);
+// Create planets
+function createPlanets() {
+    planets = [];
+    // Large planet (top right)
+    planets.push({
+        x: width * 0.85,
+        y: height * 0.2,
+        radius: 70,
+        color: '#1e3a8a',
+        gradient: ['#1e3a8a', '#3b82f6', '#1e40af']
+    });
     
-    // Rocket body (white)
+    // Medium planet (bottom left)
+    planets.push({
+        x: width * 0.15,
+        y: height * 0.75,
+        radius: 50,
+        color: '#312e81',
+        gradient: ['#312e81', '#6366f1', '#4338ca']
+    });
+    
+    // Small planet (center right)
+    planets.push({
+        x: width * 0.9,
+        y: height * 0.6,
+        radius: 30,
+        color: '#0f172a',
+        gradient: ['#0f172a', '#1e293b', '#334155']
+    });
+}
+
+// Draw spaceship
+function drawSpaceship(ship) {
+    ctx.save();
+    ctx.globalAlpha = ship.opacity;
+    ctx.translate(ship.x, ship.y);
+    ctx.rotate(ship.angle);
+    
+    // Spaceship body
     ctx.fillStyle = '#e2e8f0';
     ctx.beginPath();
-    ctx.moveTo(0, -rocket.size);
-    ctx.lineTo(-rocket.size * 0.3, rocket.size * 0.5);
-    ctx.lineTo(rocket.size * 0.3, rocket.size * 0.5);
+    ctx.moveTo(0, -ship.size);
+    ctx.lineTo(-ship.size * 0.4, ship.size * 0.3);
+    ctx.lineTo(-ship.size * 0.3, ship.size * 0.6);
+    ctx.lineTo(ship.size * 0.3, ship.size * 0.6);
+    ctx.lineTo(ship.size * 0.4, ship.size * 0.3);
     ctx.closePath();
     ctx.fill();
     
-    // Rocket flame (subtle white/gray)
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+    // Cockpit
+    ctx.fillStyle = '#3b82f6';
     ctx.beginPath();
-    ctx.moveTo(-rocket.size * 0.2, rocket.size * 0.5);
-    ctx.lineTo(0, rocket.size * 1.2);
-    ctx.lineTo(rocket.size * 0.2, rocket.size * 0.5);
+    ctx.arc(0, -ship.size * 0.2, ship.size * 0.15, 0, Math.PI * 2);
+    ctx.fill();
+    
+    // Engine glow
+    ctx.fillStyle = 'rgba(249, 115, 22, 0.6)';
+    ctx.beginPath();
+    ctx.moveTo(-ship.size * 0.2, ship.size * 0.6);
+    ctx.lineTo(0, ship.size * 0.9);
+    ctx.lineTo(ship.size * 0.2, ship.size * 0.6);
     ctx.closePath();
     ctx.fill();
     
     ctx.restore();
 }
 
+// Draw planet with gradient
+function drawPlanet(planet) {
+    // Planet glow
+    const glowGradient = ctx.createRadialGradient(
+        planet.x, planet.y, planet.radius * 0.8,
+        planet.x, planet.y, planet.radius * 1.5
+    );
+    glowGradient.addColorStop(0, planet.color + '40');
+    glowGradient.addColorStop(1, 'transparent');
+    
+    ctx.fillStyle = glowGradient;
+    ctx.beginPath();
+    ctx.arc(planet.x, planet.y, planet.radius * 1.5, 0, Math.PI * 2);
+    ctx.fill();
+    
+    // Planet body with gradient
+    const planetGradient = ctx.createRadialGradient(
+        planet.x - planet.radius * 0.3,
+        planet.y - planet.radius * 0.3,
+        0,
+        planet.x,
+        planet.y,
+        planet.radius
+    );
+    
+    planet.gradient.forEach((color, index) => {
+        planetGradient.addColorStop(index / (planet.gradient.length - 1), color);
+    });
+    
+    ctx.fillStyle = planetGradient;
+    ctx.beginPath();
+    ctx.arc(planet.x, planet.y, planet.radius, 0, Math.PI * 2);
+    ctx.fill();
+    
+    // Planet shadow
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+    ctx.beginPath();
+    ctx.arc(planet.x, planet.y, planet.radius, 0, Math.PI * 2);
+    ctx.fill();
+}
+
 // Main animation
 function animate() {
-    // Dark background with slight fade
-    ctx.fillStyle = 'rgba(2, 6, 23, 0.4)';
+    // Dark background
+    ctx.fillStyle = 'rgba(2, 6, 23, 0.3)';
     ctx.fillRect(0, 0, width, height);
     
     // Draw stars
@@ -89,18 +173,25 @@ function animate() {
         }
     });
     
-    // Draw and update rockets (vertical only)
-    rockets.forEach(rocket => {
-        drawRocket(rocket);
+    // Draw planets
+    planets.forEach(planet => {
+        drawPlanet(planet);
+    });
+    
+    // Draw and update spaceships
+    spaceships.forEach(ship => {
+        drawSpaceship(ship);
         
-        // Move straight up
-        rocket.y -= rocket.speed;
+        // Move spaceship
+        ship.x += ship.speedX;
+        ship.y += ship.speedY;
+        ship.angle += 0.005;
         
-        // Reset when off screen
-        if (rocket.y < -50) {
-            rocket.y = height + 50;
-            rocket.x = Math.random() * width;
-        }
+        // Wrap around screen
+        if (ship.x < -50) ship.x = width + 50;
+        if (ship.x > width + 50) ship.x = -50;
+        if (ship.y < -50) ship.y = height + 50;
+        if (ship.y > height + 50) ship.y = -50;
     });
     
     requestAnimationFrame(animate);
@@ -109,13 +200,15 @@ function animate() {
 // Initialize
 resize();
 createStars();
-createRockets();
+createSpaceships();
+createPlanets();
 animate();
 
 window.addEventListener('resize', () => {
     resize();
     createStars();
-    createRockets();
+    createSpaceships();
+    createPlanets();
 });
 
 // Load photos from localStorage
@@ -155,27 +248,6 @@ document.getElementById('lightbox').addEventListener('click', (e) => {
     }
 });
 
-// Load social links
-function loadSocialLinks() {
-    const social = JSON.parse(localStorage.getItem('irp_social') || '{}');
-    
-    if (social.instagram) {
-        document.getElementById('instagram-display').textContent = social.instagram;
-        document.getElementById('footer-instagram').href = `https://instagram.com/${social.instagram.replace('@', '')}`;
-    }
-    
-    if (social.whatsapp) {
-        document.getElementById('whatsapp-display').textContent = social.whatsapp;
-        const whatsappNum = social.whatsapp.replace(/[^0-9]/g, '');
-        document.getElementById('footer-whatsapp').href = `https://wa.me/${whatsappNum}`;
-    }
-    
-    if (social.email) {
-        document.getElementById('email-display').textContent = social.email;
-        document.getElementById('footer-email').href = `mailto:${social.email}`;
-    }
-}
-
 // Form handler
 function handleSubmit(e) {
     e.preventDefault();
@@ -213,4 +285,3 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 // Initialize
 loadGallery();
-loadSocialLinks();
