@@ -6,7 +6,7 @@
     <title>Admin Panel - Interstellar IRP</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="style.css">
     <style>
         .admin-container {
             max-width: 1400px;
@@ -49,34 +49,15 @@
             color: var(--accent-orange);
         }
 
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
+        .admin-section .form-group label {
             color: white;
-            font-weight: 600;
         }
 
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 1rem;
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 10px;
+        .admin-section .form-group input,
+        .admin-section .form-group select {
             background: rgba(0,0,0,0.3);
             color: white;
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 1rem;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--accent-orange);
+            border: 1px solid rgba(255,255,255,0.2);
         }
 
         .btn-admin {
@@ -89,6 +70,8 @@
             cursor: pointer;
             transition: all 0.3s;
             width: 100%;
+            font-size: 1rem;
+            font-family: 'Rajdhani', sans-serif;
         }
 
         .btn-admin:hover {
@@ -104,6 +87,7 @@
             margin-top: 1rem;
             max-height: 400px;
             overflow-y: auto;
+            display: none;
         }
 
         .code-output pre {
@@ -124,6 +108,8 @@
             margin-top: 1rem;
             font-weight: 700;
             transition: all 0.3s;
+            display: none;
+            font-family: 'Rajdhani', sans-serif;
         }
 
         .copy-btn:hover {
@@ -184,7 +170,7 @@
     <nav>
         <div class="nav-container">
             <a href="index.html" class="logo">
-                <img src="images/logo.png" alt="IRP Logo">
+                <img src="logo.png.jpeg" alt="IRP Logo">
                 <span class="logo-text">ADMIN PANEL</span>
             </a>
             <ul class="nav-links">
@@ -212,7 +198,7 @@
                 <div class="form-group">
                     <label>Photo URL or Upload</label>
                     <input type="text" id="photo-url" placeholder="Paste image URL">
-                    <input type="file" id="photo-file" accept="image/*" style="margin-top: 1rem;">
+                    <input type="file" id="photo-file" accept="image/*" style="margin-top: 1rem; color: white;">
                 </div>
 
                 <div class="form-group">
@@ -231,15 +217,15 @@
 
                 <div class="photo-preview" id="photo-preview"></div>
 
-                <button class="copy-btn" onclick="generateGalleryCode()" style="margin-top: 2rem;">
+                <button class="copy-btn" onclick="generateGalleryCode()" style="margin-top: 2rem; display: inline-block;">
                     <i class="fas fa-code"></i> Generate Gallery Code
                 </button>
 
-                <div class="code-output" id="gallery-code-output" style="display: none;">
+                <div class="code-output" id="gallery-code-output">
                     <pre id="gallery-code"></pre>
                 </div>
 
-                <button class="copy-btn" onclick="copyCode('gallery-code')" id="copy-gallery-btn" style="display: none;">
+                <button class="copy-btn" onclick="copyCode('gallery-code')" id="copy-gallery-btn">
                     <i class="fas fa-copy"></i> Copy Code
                 </button>
 
@@ -271,15 +257,15 @@
                     <i class="fas fa-save"></i> Update Social Links
                 </button>
 
-                <button class="copy-btn" onclick="generateSocialCode()" style="margin-top: 1rem;">
+                <button class="copy-btn" onclick="generateSocialCode()" style="margin-top: 1rem; display: inline-block;">
                     <i class="fas fa-code"></i> Generate Social Links Code
                 </button>
 
-                <div class="code-output" id="social-code-output" style="display: none;">
+                <div class="code-output" id="social-code-output">
                     <pre id="social-code"></pre>
                 </div>
 
-                <button class="copy-btn" onclick="copyCode('social-code')" id="copy-social-btn" style="display: none;">
+                <button class="copy-btn" onclick="copyCode('social-code')" id="copy-social-btn">
                     <i class="fas fa-copy"></i> Copy Code
                 </button>
 
@@ -292,26 +278,26 @@
             <div class="admin-section" style="grid-column: 1 / -1;">
                 <h2><i class="fas fa-database"></i> Data Management</h2>
 
-                <button class="btn-admin" onclick="exportAllData()" style="margin-right: 1rem;">
+                <button class="btn-admin" onclick="exportAllData()" style="margin-right: 1rem; display: inline-block; width: auto;">
                     <i class="fas fa-download"></i> Export All Data
                 </button>
 
-                <button class="btn-admin" onclick="document.getElementById('import-file').click()">
+                <button class="btn-admin" onclick="document.getElementById('import-file').click()" style="display: inline-block; width: auto;">
                     <i class="fas fa-upload"></i> Import Data
                 </button>
                 <input type="file" id="import-file" accept=".json" style="display: none;" onchange="importData(event)">
 
-                <div class="code-output" id="export-output" style="display: none;">
+                <div class="code-output" id="export-output">
                     <pre id="export-code"></pre>
                 </div>
 
-                <button class="copy-btn" onclick="copyCode('export-code')" id="copy-export-btn" style="display: none;">
+                <button class="copy-btn" onclick="copyCode('export-code')" id="copy-export-btn">
                     <i class="fas fa-copy"></i> Copy Export Code
                 </button>
             </div>
         </div>
     </div>
 
-    <script src="js/admin.js"></script>
+    <script src="admin.js"></script>
 </body>
 </html>
