@@ -9,13 +9,17 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Hidden anchor for logo scroll -->
+    <div id="top"></div>
+
     <!-- 3D Background Canvas -->
     <div id="canvas-container"></div>
 
     <!-- Navigation -->
     <nav>
         <div class="nav-container">
-            <a href="#home" class="logo" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">
+            <!-- FIXED LOGO LINK -->
+            <a href="#top" class="logo">
                 <img src="logo.png.jpeg" alt="IRP Logo">
                 <span class="logo-text">INTERSTELLAR</span>
             </a>
