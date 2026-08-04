@@ -11,16 +11,19 @@ let planets = [];
 function resize() {
     width = canvas.width = window.innerWidth;
     height = canvas.height = window.innerHeight;
+    // Re-create planets and spaceships on resize to ensure they're visible
+    createPlanets();
+    createSpaceships();
 }
 
 // Create stars
 function createStars() {
     stars = [];
-    for (let i = 0; i < 250; i++) {
+    for (let i = 0; i < 300; i++) {
         stars.push({
             x: Math.random() * width,
             y: Math.random() * height,
-            size: Math.random() * 1.5 + 0.5,
+            size: Math.random() * 2 + 0.5,
             speed: Math.random() * 0.4 + 0.1,
             twinkle: Math.random() * Math.PI * 2
         });
@@ -34,11 +37,11 @@ function createSpaceships() {
         spaceships.push({
             x: Math.random() * width,
             y: Math.random() * height,
-            speedX: (Math.random() - 0.5) * 0.8,
-            speedY: (Math.random() - 0.5) * 0.8,
-            size: Math.random() * 15 + 10,
+            speedX: (Math.random() - 0.5) * 1,
+            speedY: (Math.random() - 0.5) * 1,
+            size: Math.random() * 20 + 15,
             angle: Math.random() * Math.PI * 2,
-            opacity: Math.random() * 0.2 + 0.1
+            opacity: Math.random() * 0.3 + 0.2
         });
     }
 }
@@ -46,30 +49,28 @@ function createSpaceships() {
 // Create planets
 function createPlanets() {
     planets = [];
+    
     // Large planet (top right)
     planets.push({
         x: width * 0.85,
-        y: height * 0.2,
-        radius: 70,
-        color: '#1e3a8a',
-        gradient: ['#1e3a8a', '#3b82f6', '#1e40af']
+        y: height * 0.15,
+        radius: 90,
+        gradient: ['#1e3a8a', '#3b82f6', '#60a5fa']
     });
     
     // Medium planet (bottom left)
     planets.push({
-        x: width * 0.15,
-        y: height * 0.75,
-        radius: 50,
-        color: '#312e81',
-        gradient: ['#312e81', '#6366f1', '#4338ca']
+        x: width * 0.12,
+        y: height * 0.7,
+        radius: 60,
+        gradient: ['#312e81', '#6366f1', '#818cf8']
     });
     
     // Small planet (center right)
     planets.push({
-        x: width * 0.9,
-        y: height * 0.6,
-        radius: 30,
-        color: '#0f172a',
+        x: width * 0.88,
+        y: height * 0.55,
+        radius: 35,
         gradient: ['#0f172a', '#1e293b', '#334155']
     });
 }
@@ -81,7 +82,7 @@ function drawSpaceship(ship) {
     ctx.translate(ship.x, ship.y);
     ctx.rotate(ship.angle);
     
-    // Spaceship body
+    // Spaceship body (white/gray)
     ctx.fillStyle = '#e2e8f0';
     ctx.beginPath();
     ctx.moveTo(0, -ship.size);
@@ -92,14 +93,14 @@ function drawSpaceship(ship) {
     ctx.closePath();
     ctx.fill();
     
-    // Cockpit
+    // Cockpit (blue)
     ctx.fillStyle = '#3b82f6';
     ctx.beginPath();
     ctx.arc(0, -ship.size * 0.2, ship.size * 0.15, 0, Math.PI * 2);
     ctx.fill();
     
-    // Engine glow
-    ctx.fillStyle = 'rgba(249, 115, 22, 0.6)';
+    // Engine glow (orange)
+    ctx.fillStyle = 'rgba(249, 115, 22, 0.7)';
     ctx.beginPath();
     ctx.moveTo(-ship.size * 0.2, ship.size * 0.6);
     ctx.lineTo(0, ship.size * 0.9);
@@ -112,17 +113,17 @@ function drawSpaceship(ship) {
 
 // Draw planet with gradient
 function drawPlanet(planet) {
-    // Planet glow
+    // Planet glow/halo
     const glowGradient = ctx.createRadialGradient(
-        planet.x, planet.y, planet.radius * 0.8,
-        planet.x, planet.y, planet.radius * 1.5
+        planet.x, planet.y, planet.radius * 0.5,
+        planet.x, planet.y, planet.radius * 1.8
     );
-    glowGradient.addColorStop(0, planet.color + '40');
+    glowGradient.addColorStop(0, planet.gradient[1] + '50');
     glowGradient.addColorStop(1, 'transparent');
     
     ctx.fillStyle = glowGradient;
     ctx.beginPath();
-    ctx.arc(planet.x, planet.y, planet.radius * 1.5, 0, Math.PI * 2);
+    ctx.arc(planet.x, planet.y, planet.radius * 1.8, 0, Math.PI * 2);
     ctx.fill();
     
     // Planet body with gradient
@@ -135,32 +136,32 @@ function drawPlanet(planet) {
         planet.radius
     );
     
-    planet.gradient.forEach((color, index) => {
-        planetGradient.addColorStop(index / (planet.gradient.length - 1), color);
-    });
+    planetGradient.addColorStop(0, planet.gradient[2]);
+    planetGradient.addColorStop(0.5, planet.gradient[1]);
+    planetGradient.addColorStop(1, planet.gradient[0]);
     
     ctx.fillStyle = planetGradient;
     ctx.beginPath();
     ctx.arc(planet.x, planet.y, planet.radius, 0, Math.PI * 2);
     ctx.fill();
     
-    // Planet shadow
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+    // Add shadow overlay
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
     ctx.beginPath();
     ctx.arc(planet.x, planet.y, planet.radius, 0, Math.PI * 2);
     ctx.fill();
 }
 
-// Main animation
+// Main animation loop
 function animate() {
-    // Dark background
-    ctx.fillStyle = 'rgba(2, 6, 23, 0.3)';
+    // Clear canvas with dark background
+    ctx.fillStyle = '#020617';
     ctx.fillRect(0, 0, width, height);
     
     // Draw stars
     stars.forEach(star => {
         star.twinkle += 0.03;
-        const alpha = 0.3 + Math.sin(star.twinkle) * 0.3;
+        const alpha = 0.4 + Math.sin(star.twinkle) * 0.4;
         ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
         ctx.beginPath();
         ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
@@ -173,7 +174,7 @@ function animate() {
         }
     });
     
-    // Draw planets
+    // Draw planets (behind spaceships)
     planets.forEach(planet => {
         drawPlanet(planet);
     });
@@ -185,9 +186,9 @@ function animate() {
         // Move spaceship
         ship.x += ship.speedX;
         ship.y += ship.speedY;
-        ship.angle += 0.005;
+        ship.angle += 0.003;
         
-        // Wrap around screen
+        // Wrap around screen edges
         if (ship.x < -50) ship.x = width + 50;
         if (ship.x > width + 50) ship.x = -50;
         if (ship.y < -50) ship.y = height + 50;
@@ -197,18 +198,21 @@ function animate() {
     requestAnimationFrame(animate);
 }
 
-// Initialize
-resize();
-createStars();
-createSpaceships();
-createPlanets();
-animate();
-
-window.addEventListener('resize', () => {
+// Initialize everything
+function init() {
     resize();
     createStars();
     createSpaceships();
     createPlanets();
+    animate();
+}
+
+// Start the animation
+init();
+
+// Handle window resize
+window.addEventListener('resize', () => {
+    resize();
 });
 
 // Load photos from localStorage
@@ -232,7 +236,7 @@ function loadGallery() {
     `).join('');
 }
 
-// Lightbox
+// Lightbox functions
 function openLightbox(url) {
     document.getElementById('lightbox').style.display = 'flex';
     document.getElementById('lightbox-img').src = url;
@@ -272,16 +276,19 @@ function toggleMenu() {
     }
 }
 
-// Smooth scroll
+// Smooth scroll for all anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({ behavior: 'smooth' });
+        const href = this.getAttribute('href');
+        if (href !== '#') {
+            e.preventDefault();
+            const target = document.querySelector(href);
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
         }
     });
 });
 
-// Initialize
+// Initialize gallery
 loadGallery();
