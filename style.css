@@ -11,6 +11,7 @@
     --light-orange: #fb923c;
     --dark-bg: #0f172a;
     --space-black: #020617;
+    --purple: #a855f7;
 }
 
 body {
@@ -59,7 +60,6 @@ nav {
     text-decoration: none;
 }
 
-/* FIXED LOGO SIZE */
 .logo img {
     width: 45px;
     height: 45px;
@@ -79,8 +79,9 @@ nav {
 
 .nav-links {
     display: flex;
-    gap: 2rem;
+    gap: 1.5rem;
     list-style: none;
+    align-items: center;
 }
 
 .nav-links a {
@@ -90,11 +91,23 @@ nav {
     transition: all 0.3s;
     text-transform: uppercase;
     letter-spacing: 1px;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
 }
 
 .nav-links a:hover {
     color: var(--accent-orange);
+}
+
+.nav-links .store-link {
+    color: var(--accent-orange);
+    border: 1px solid var(--accent-orange);
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+}
+
+.nav-links .store-link:hover {
+    background: var(--accent-orange);
+    color: white;
 }
 
 .mobile-menu {
@@ -201,6 +214,80 @@ nav {
 .btn-secondary:hover {
     background: var(--secondary-blue);
     transform: translateY(-3px);
+}
+
+.btn-store {
+    background: linear-gradient(135deg, var(--purple), #c084fc);
+    color: white;
+    box-shadow: 0 10px 40px rgba(168, 85, 247, 0.5);
+}
+
+.btn-store:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 50px rgba(168, 85, 247, 0.7);
+}
+
+.btn-store-outline {
+    background: transparent;
+    color: var(--accent-orange);
+    border: 2px solid var(--accent-orange);
+    padding: 0.8rem 2rem;
+}
+
+.btn-store-outline:hover {
+    background: var(--accent-orange);
+    color: white;
+    transform: translateY(-3px);
+}
+
+/* Store Banner */
+.store-banner {
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(249, 115, 22, 0.2));
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    border-radius: 20px;
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 2rem;
+    position: relative;
+    z-index: 2;
+    backdrop-filter: blur(10px);
+}
+
+.store-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.store-icon {
+    font-size: 3rem;
+    color: var(--accent-orange);
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.store-text {
+    flex: 1;
+    min-width: 250px;
+}
+
+.store-text h3 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, var(--accent-orange), var(--purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.store-text p {
+    color: #cbd5e1;
+    font-size: 1rem;
 }
 
 .stats {
@@ -560,10 +647,10 @@ nav {
 }
 
 .contact-details li {
-    padding: 1rem 0;
+    padding: 1.2rem 0;
     display: flex;
-    align-items: center;
-    gap: 1rem;
+    align-items: flex-start;
+    gap: 1.2rem;
     color: #e2e8f0;
 }
 
@@ -577,6 +664,17 @@ nav {
     justify-content: center;
     color: var(--accent-orange);
     font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.contact-details a {
+    color: #e2e8f0;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.contact-details a:hover {
+    color: var(--accent-orange);
 }
 
 .contact-form {
@@ -648,27 +746,27 @@ footer {
 .social-links {
     display: flex;
     justify-content: center;
-    gap: 1rem;
+    gap: 1.2rem;
     margin-bottom: 2rem;
 }
 
 .social-links a {
-    width: 45px;
-    height: 45px;
+    width: 50px;
+    height: 50px;
     background: rgba(255,255,255,0.1);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     transition: all 0.3s;
     text-decoration: none;
 }
 
 .social-links a:hover {
     background: var(--accent-orange);
-    transform: translateY(-3px);
+    transform: translateY(-5px);
 }
 
 .footer-bottom {
@@ -676,6 +774,11 @@ footer {
     padding-top: 2rem;
     color: #64748b;
     font-size: 0.9rem;
+}
+
+.footer-bottom a {
+    color: var(--accent-orange);
+    text-decoration: none;
 }
 
 @media (max-width: 968px) {
@@ -702,5 +805,10 @@ footer {
     
     .hero h1 {
         font-size: 2rem;
+    }
+    
+    .store-content {
+        flex-direction: column;
+        text-align: center;
     }
 }
