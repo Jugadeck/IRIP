@@ -80,12 +80,7 @@ ${photos.map(photo => `    <div class="gallery-item" onclick="openLightbox('${ph
             <span>${photo.category}</span>
         </div>
     </div>`).join('\n')}
-</div>
-
-<!-- JavaScript Data -->
-<script>
-const galleryPhotos = ${JSON.stringify(photos, null, 2)};
-</script>`;
+</div>`;
 
     document.getElementById('gallery-code').textContent = code;
     document.getElementById('gallery-code-output').style.display = 'block';
@@ -101,7 +96,7 @@ function updateSocialLinks() {
     const social = { instagram, whatsapp, email };
     localStorage.setItem('irp_social', JSON.stringify(social));
 
-    alert('Social links updated successfully!');
+    alert('Social links updated successfully! Refresh index.html to see changes.');
 }
 
 // Generate Social Code
