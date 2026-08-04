@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interstellar Robotics & Innovation Park</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 3D Background Canvas -->
+    <div id="canvas-container"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <img src="images/logo.png" alt="IRP Logo">
+                <span class="logo-text">INTERSTELLAR</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#programs">Programs</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#partners">Partners</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-rocket"></i> Beyond Boundaries
+            </div>
+            <h1>Interstellar <span>Robotics</span> & Innovation Park</h1>
+            <p class="hero-tagline">Where Dreams Launch Into Interstellar Space</p>
+            <p class="hero-description">
+                We're a startup of dreamers pushing beyond the boundaries of our solar system. 
+                Transitioning from robotics to aerospace, we inspire the next generation of engineers 
+                through hands-on STEM education and cutting-edge technology.
+            </p>
+            <div class="hero-buttons">
+                <a href="#programs" class="btn btn-primary">
+                    <i class="fas fa-graduation-cap"></i> Explore Programs
+                </a>
+                <a href="#contact" class="btn btn-secondary">
+                    <i class="fas fa-paper-plane"></i> Get In Touch
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <div class="stats">
+        <div class="stat-item">
+            <span class="stat-number">2</span>
+            <div class="stat-label">Educational Modules</div>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">60+</span>
+            <div class="stat-label">Students Per Day</div>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">3</span>
+            <div class="stat-label">Strategic Partners</div>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">∞</span>
+            <div class="stat-label">Possibilities</div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="section-title">
+            <h2>About Us</h2>
+            <p>Bridging the gap between academic theory and practical engineering</p>
+        </div>
+        <div class="about-grid">
+            <div class="about-image">
+                <div class="about-image-placeholder">
+                    <i class="fas fa-robot"></i>
+                </div>
+            </div>
+            <div class="about-content">
+                <h3>Pioneering the Future of STEM Education</h3>
+                <p>
+                    Led by a team of passionate B.Tech students, Interstellar Robotics and Innovation Park 
+                    brings hands-on STEM, robotics, and aerospace education directly to school students.
+                </p>
+                <ul class="features-list">
+                    <li><i class="fas fa-check-circle"></i> Hands-on, kit-based workshops</li>
+                    <li><i class="fas fa-check-circle"></i> Early exposure to microcontrollers & sensors</li>
+                    <li><i class="fas fa-check-circle"></i> Real-world engineering projects</li>
+                    <li><i class="fas fa-check-circle"></i> Expert mentorship from industry professionals</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs Section -->
+    <section class="section programs" id="programs">
+        <div class="section-title">
+            <h2>Our Programs</h2>
+            <p>Interactive workshops designed to ignite curiosity and build practical skills</p>
+        </div>
+        <div class="programs-grid">
+            <div class="program-card">
+                <div class="program-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <h3>Module A: Autonomous Robotics</h3>
+                <span class="program-target">Classes 8–10</span>
+                <p>Learn microcontroller integration and basic logic programming through hands-on robotics projects.</p>
+                <ul class="program-topics">
+                    <li><i class="fas fa-angle-right"></i> Introduction to Arduino & microcontroller architecture</li>
+                    <li><i class="fas fa-angle-right"></i> Interfacing sensors: Ultrasonic & Infrared</li>
+                    <li><i class="fas fa-angle-right"></i> Basic programming logic: If/Else & loops</li>
+                </ul>
+                <div class="program-project">
+                    <strong><i class="fas fa-trophy"></i> Hands-on Project:</strong>
+                    Building a Line-Following or Obstacle-Avoiding Robot
+                </div>
+            </div>
+
+            <div class="program-card">
+                <div class="program-icon">
+                    <i class="fas fa-space-shuttle"></i>
+                </div>
+                <h3>Module B: Advanced STEM & Aerospace</h3>
+                <span class="program-target">Classes 11–12</span>
+                <p>Explore Internet of Things (IoT), coding, and flight physics with advanced aerospace concepts.</p>
+                <ul class="program-topics">
+                    <li><i class="fas fa-angle-right"></i> Python programming for hardware</li>
+                    <li><i class="fas fa-angle-right"></i> Wireless communication: Bluetooth & Wi-Fi</li>
+                    <li><i class="fas fa-angle-right"></i> Aerospace basics: Aerodynamics & drone mechanics</li>
+                </ul>
+                <div class="program-project">
+                    <strong><i class="fas fa-trophy"></i> Hands-on Project:</strong>
+                    Assembling a smart IoT automation system or a mini-quadcopter
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="section" id="gallery">
+        <div class="section-title">
+            <h2>Gallery</h2>
+            <p>Capturing moments of innovation and learning</p>
+        </div>
+        <div class="gallery-grid" id="gallery-container">
+            <!-- Photos will be loaded dynamically -->
+        </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section class="section" id="partners">
+        <div class="section-title">
+            <h2>Our Partners</h2>
+            <p>Working with industry leaders</p>
+        </div>
+        <div class="partners-grid">
+            <div class="partner-card">
+                <div class="partner-icon">
+                    <i class="fas fa-university"></i>
+                </div>
+                <h3>AKTU Automation Lab</h3>
+                <p>Collaborating with Dr. A.P.J. Abdul Kalam Technical University's automation laboratory.</p>
+                <span class="partner-type">Collaboration</span>
+            </div>
+            <div class="partner-card">
+                <div class="partner-icon">
+                    <i class="fas fa-microchip"></i>
+                </div>
+                <h3>Kalam Labs</h3>
+                <p>Partnering with innovators building stratospheric aerial systems.</p>
+                <span class="partner-type">Collaboration</span>
+            </div>
+            <div class="partner-card">
+                <div class="partner-icon">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <h3>Relativity Space</h3>
+                <p>Proudly sponsored by the American aerospace manufacturer.</p>
+                <span class="partner-type">Sponsor</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact" id="contact">
+        <div class="section-title">
+            <h2>Get In Touch</h2>
+            <p>Ready to launch your students into the future?</p>
+        </div>
+        <div class="contact-grid">
+            <div class="contact-info">
+                <h3>Let's Start the Conversation</h3>
+                <p>Whether you're a school administrator, student, or potential partner, we'd love to hear from you.</p>
+                <ul class="contact-details">
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <strong>Email Us</strong><br>
+                            <span id="email-display">your-email@gmail.com</span>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fab fa-whatsapp"></i>
+                        <div>
+                            <strong>WhatsApp</strong><br>
+                            <span id="whatsapp-display">+91 XXXXX XXXXX</span>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fab fa-instagram"></i>
+                        <div>
+                            <strong>Instagram</strong><br>
+                            <span id="instagram-display">@your-instagram</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="contact-form">
+                <form>
+                    <div class="form-group">
+                        <label>Your Name</label>
+                        <input type="text" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Message</label>
+                        <textarea placeholder="Tell us about your requirements..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">INTERSTELLAR ROBOTICS & INNOVATION PARK</div>
+            <p class="footer-tagline">Beyond Boundaries. Beyond Imagination.</p>
+            <div class="social-links">
+                <a href="#" id="footer-instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="#" id="footer-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="#" id="footer-email"><i class="fas fa-envelope"></i></a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Interstellar Robotics and Innovation Park. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox">
+        <span class="close-lightbox">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
